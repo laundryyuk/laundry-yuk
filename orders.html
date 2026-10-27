@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riwayat Pesanan - Laundry Yuk</title>
+  <meta name="description" content="Lihat semua pesanan laundry Anda, dari yang sedang diproses sampai yang sudah selesai.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="dashboard-body">
+  <!-- Top Navigation Bar -->
+  <header class="dashboard-navbar">
+    <div class="nav-container">
+      <a href="orders.html" class="nav-logo" aria-label="Beranda Laundry Yuk">
+        <div class="nav-logo-icon">
+          <!-- Logo SVG -->
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="37" stroke="#0077F5" stroke-width="4.5" fill="none" />
+            <path d="M12 42C12 26.536 24.536 14 40 14C55.464 14 68 26.536 68 42C68 57.464 55.464 68 40 68" stroke="#00C4FF" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="40" cy="40" r="23" fill="#E6F6FE" stroke="#005BDB" stroke-width="3" />
+            <path d="M40 22C40 22 47 31 47 37C47 41.5 43.5 45 40 45C36.5 45 33 41.5 33 37C33 31 40 22 40 22Z" fill="url(#navDropGrad)"/>
+            <path d="M26 44C29 39 36 39 40 44C44 49 51 49 54 44C54 53 47 58 40 58C32 58 26 52 26 44Z" fill="url(#navWaveGrad)"/>
+            <defs>
+              <linearGradient id="navDropGrad" x1="40" y1="22" x2="40" y2="45" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00E5FF"/>
+                <stop offset="1" stop-color="#0066FF"/>
+              </linearGradient>
+              <linearGradient id="navWaveGrad" x1="40" y1="39" x2="40" y2="58" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00A6FF"/>
+                <stop offset="1" stop-color="#0040C8"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="nav-logo-text">
+          <span class="logo-laundry">LAUNDRY</span>
+          <span class="logo-yuk">Yuk</span>
+        </div>
+      </a>
+
+      <!-- Profile Avatar Button with Dropdown -->
+      <div class="user-profile-menu">
+        <button class="profile-avatar-btn" id="profileBtn" aria-label="Menu Profil Pengguna" aria-expanded="false">
+          <svg class="avatar-svg" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+        <!-- Dropdown Menu -->
+        <div class="profile-dropdown hidden" id="profileDropdown">
+          <div class="dropdown-header">
+            <span class="user-greeting" id="userNameDisplay">Pelanggan Setia</span>
+            <span class="user-email" id="userEmailDisplay">0812-9999-8888</span>
+          </div>
+          <div class="dropdown-divider"></div>
+          <a href="orders.html" class="dropdown-item active">Riwayat Pesanan</a>
+          <button class="dropdown-item text-danger" id="logoutBtn">Keluar (Logout)</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="dashboard-main">
+    <div class="content-container">
+      <!-- Title & Subtitle -->
+      <section class="page-header">
+        <h1 class="page-title">Riwayat Pesanan</h1>
+        <p class="page-subtitle">
+          Lihat semua pesanan laundry Anda, dari yang sedang diproses sampai yang sudah selesai.
+        </p>
+      </section>
+
+      <!-- 3 Summary Statistics Cards -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">Total pesanan</span>
+          <span class="stat-value text-blue" id="statTotal">5</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Sedang Diproses</span>
+          <span class="stat-value text-orange" id="statProcessing">2</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Selesai</span>
+          <span class="stat-value text-green" id="statCompleted">3</span>
+        </div>
+      </section>
+
+      <!-- Filter Tabs / Pills -->
+      <section class="filter-tabs-wrapper">
+        <div class="filter-tabs" role="tablist">
+          <button class="tab-pill active" data-filter="all" role="tab" aria-selected="true" id="tabAll">
+            Semua (5)
+          </button>
+          <button class="tab-pill" data-filter="processing" role="tab" aria-selected="false" id="tabProcessing">
+            Diproses (2)
+          </button>
+          <button class="tab-pill" data-filter="completed" role="tab" aria-selected="false" id="tabCompleted">
+            Selesai (3)
+          </button>
+        </div>
+      </section>
+
+      <!-- Order List Cards -->
+      <section class="orders-list" id="ordersContainer">
+        <!-- Rendered dynamically by orders.js to support filters & state -->
+      </section>
+    </div>
+  </main>
+
+  <script src="orders.js"></script>
+</body>
+</html>

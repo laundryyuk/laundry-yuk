@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laundry Yuk - Aplikasi Pengguna</title>
+  <meta name="description"
+    content="Aplikasi Laundry Yuk untuk memudahkan kebutuhan laundry Anda dengan layanan cepat, aman, dan terpercaya.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- ========================================================
+       SHARED NAVBAR (Untuk Halaman Riwayat & Detail Pesanan)
+       ======================================================== -->
+  <header class="dashboard-navbar hidden" id="appNavbar">
+    <div class="nav-container">
+      <a href="#orders" class="nav-logo" id="navLogoBtn" aria-label="Beranda Laundry Yuk">
+        <div class="nav-logo-icon">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="37" stroke="#0077F5" stroke-width="4.5" fill="none" />
+            <path d="M12 42C12 26.536 24.536 14 40 14C55.464 14 68 26.536 68 42C68 57.464 55.464 68 40 68"
+              stroke="#00C4FF" stroke-width="4" stroke-linecap="round" />
+            <circle cx="40" cy="40" r="23" fill="#E6F6FE" stroke="#005BDB" stroke-width="3" />
+            <path d="M40 22C40 22 47 31 47 37C47 41.5 43.5 45 40 45C36.5 45 33 41.5 33 37C33 31 40 22 40 22Z"
+              fill="url(#navDropGrad)" />
+            <path d="M26 44C29 39 36 39 40 44C44 49 51 49 54 44C54 53 47 58 40 58C32 58 26 52 26 44Z"
+              fill="url(#navWaveGrad)" />
+            <defs>
+              <linearGradient id="navDropGrad" x1="40" y1="22" x2="40" y2="45" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00E5FF" />
+                <stop offset="1" stop-color="#0066FF" />
+              </linearGradient>
+              <linearGradient id="navWaveGrad" x1="40" y1="39" x2="40" y2="58" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00A6FF" />
+                <stop offset="1" stop-color="#0040C8" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="nav-logo-text">
+          <span class="logo-laundry">LAUNDRY</span>
+          <span class="logo-yuk">Yuk</span>
+        </div>
+      </a>
+
+      <!-- Right Navbar Group: Role Badge & Profile -->
+      <div class="nav-right-group">
+        <!-- Role Indicator Badge -->
+        <div class="role-indicator-badge" id="roleIndicatorBadge">
+          <span class="role-dot" id="roleDot"></span>
+          <span class="role-text" id="roleText">Pelanggan</span>
+        </div>
+
+        <!-- Profile Avatar Button with Dropdown -->
+        <div class="user-profile-menu">
+          <button class="profile-avatar-btn" id="profileBtn" aria-label="Menu Profil Pengguna" aria-expanded="false">
+            <svg class="avatar-svg" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </button>
+          <!-- Dropdown Menu -->
+          <div class="profile-dropdown hidden" id="profileDropdown">
+            <div class="dropdown-header">
+              <span class="user-greeting" id="userNameDisplay">Pelanggan Setia</span>
+              <span class="user-email" id="userEmailDisplay">08129999888</span>
+            </div>
+            <div class="dropdown-divider"></div>
+
+            <!-- Links visible only for User -->
+            <div id="userMenuLinks">
+              <button class="dropdown-item" id="menuOrdersBtn">Riwayat Pesanan</button>
+            </div>
+
+            <!-- Links visible only for Admin -->
+            <div id="adminMenuLinks" class="hidden">
+              <button class="dropdown-item" id="menuAdminHubBtn">Dashboard Admin</button>
+              <button class="dropdown-item" id="menuAdminOrdersBtn">Kelola Pesanan</button>
+              <button class="dropdown-item" id="menuAdminKanbanBtn">Papan Status</button>
+            </div>
+
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item text-danger" id="logoutBtn">Keluar (Logout)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       VIEW 1: LOGIN (Landing Screen)
+       ======================================================== -->
+  <section class="app-view active" id="viewLogin">
+    <div class="login-layout-wrapper">
+      <!-- Left Hero Section -->
+      <div class="hero-section">
+        <!-- Decorative Background Bubbles -->
+        <div class="deco-bubble bubble-top-left" aria-hidden="true"></div>
+        <div class="deco-bubble bubble-mid-left" aria-hidden="true"></div>
+        <div class="deco-bubble bubble-top-right" aria-hidden="true"></div>
+
+        <div class="hero-content">
+          <!-- Logo -->
+          <header class="brand-logo">
+            <div class="logo-icon-wrapper">
+              <svg class="logo-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"
+                aria-label="Logo Laundry Yuk">
+                <circle cx="40" cy="40" r="37" stroke="#0077F5" stroke-width="4.5" fill="none" />
+                <path d="M12 42C12 26.536 24.536 14 40 14C55.464 14 68 26.536 68 42C68 57.464 55.464 68 40 68"
+                  stroke="#00C4FF" stroke-width="4" stroke-linecap="round" />
+                <circle cx="40" cy="40" r="23" fill="#E6F6FE" stroke="#005BDB" stroke-width="3" />
+                <path d="M40 22C40 22 47 31 47 37C47 41.5 43.5 45 40 45C36.5 45 33 41.5 33 37C33 31 40 22 40 22Z"
+                  fill="url(#loginDropGrad)" />
+                <path d="M26 44C29 39 36 39 40 44C44 49 51 49 54 44C54 53 47 58 40 58C32 58 26 52 26 44Z"
+                  fill="url(#loginWaveGrad)" />
+                <defs>
+                  <linearGradient id="loginDropGrad" x1="40" y1="22" x2="40" y2="45" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#00E5FF" />
+                    <stop offset="1" stop-color="#0066FF" />
+                  </linearGradient>
+                  <linearGradient id="loginWaveGrad" x1="40" y1="39" x2="40" y2="58" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#00A6FF" />
+                    <stop offset="1" stop-color="#0040C8" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="logo-text">
+              <span class="logo-laundry">LAUNDRY</span>
+              <span class="logo-yuk">Yuk</span>
+            </div>
+          </header>
+
+          <!-- Main Headline -->
+          <div class="hero-text-block">
+            <h1 class="hero-title">
+              Bersih, Rapi,<br>
+              Lebih Mudah
+            </h1>
+            <p class="hero-subtitle">
+              Laundry Yuk hadir untuk memudahkan kebutuhan laundry Anda dengan layanan cepat,aman,dan terpercaya.
+            </p>
+          </div>
+
+          <!-- 3 Feature Pillars -->
+          <div class="features-row">
+            <div class="feature-item">
+              <div class="feature-icon-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <polyline points="9 12 11 14 15 10" />
+                </svg>
+              </div>
+              <div class="feature-info">
+                <h3 class="feature-title">Aman</h3>
+                <p class="feature-desc">Data dan barang<br>Terjamin</p>
+              </div>
+            </div>
+
+            <div class="feature-divider" aria-hidden="true"></div>
+
+            <div class="feature-item">
+              <div class="feature-icon-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                </svg>
+              </div>
+              <div class="feature-info">
+                <h3 class="feature-title">Cepat</h3>
+                <p class="feature-desc">Proses Laundry<br>lebih efisien</p>
+              </div>
+            </div>
+
+            <div class="feature-divider" aria-hidden="true"></div>
+
+            <div class="feature-item">
+              <div class="feature-icon-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              </div>
+              <div class="feature-info">
+                <h3 class="feature-title">Terpercaya</h3>
+                <p class="feature-desc">Ribuan Pelanggan<br>telah menggunakan</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Water Wave Artwork at Bottom Left -->
+        <div class="wave-art-container" aria-hidden="true">
+          <img src="assets/ombak1.png" alt="Water splash wave decoration" class="wave-img">
+        </div>
+      </div>
+
+      <!-- Right Login Card Section -->
+      <div class="auth-section">
+        <main class="auth-card">
+          <header class="card-header">
+            <h2 class="card-title">Login</h2>
+            <p class="card-subtitle">
+              Masukkan <strong>Nomor HP</strong> untuk melanjutkan
+            </p>
+          </header>
+
+          <form class="auth-form" id="loginForm" novalidate>
+            <div class="form-group">
+              <label for="identifier" class="sr-only">Nomor HP</label>
+              <input type="text" id="identifier" name="identifier" class="form-input" placeholder="Nomor WhatsApp / HP"
+                required autocomplete="username">
+              <span class="field-error" id="identifierError"></span>
+            </div>
+
+            <div class="form-group password-group">
+              <label for="password" class="sr-only">Kata Sandi</label>
+              <div class="input-password-wrapper">
+                <input type="password" id="password" name="password" class="form-input" placeholder="Kata Sandi"
+                  required autocomplete="current-password">
+                <button type="button" class="password-toggle-btn" id="togglePassword"
+                  aria-label="Tampilkan atau sembunyikan kata sandi">
+                  <svg id="eyeOffIcon" class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                      d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
+                    </path>
+                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                  </svg>
+                  <svg id="eyeOnIcon" class="eye-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+              <span class="field-error" id="passwordError"></span>
+            </div>
+
+            <div class="forgot-wrapper">
+              <a href="#forgot" class="forgot-link" id="forgotPasswordBtn">Lupa Kata Sandi?</a>
+            </div>
+
+            <button type="submit" class="btn-primary" id="loginBtn">
+              <span class="btn-text">Masuk</span>
+              <span class="btn-spinner hidden" id="loginSpinner"></span>
+            </button>
+          </form>
+
+          <footer class="card-footer">
+            <div class="divider-container">
+              <span class="divider-line"></span>
+              <span class="divider-text">Belum punya akun?</span>
+              <span class="divider-line"></span>
+            </div>
+            <button type="button" class="btn-register-link" id="registerBtn">Daftar Akun Baru</button>
+          </footer>
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       VIEW 2: RIWAYAT PESANAN (Order History)
+       ======================================================== -->
+  <section class="app-view" id="viewOrders">
+    <main class="dashboard-main">
+      <div class="content-container">
+        <!-- Title & Subtitle -->
+        <section class="page-header">
+          <h1 class="page-title">Riwayat Pesanan</h1>
+          <p class="page-subtitle">
+            Lihat semua pesanan laundry Anda, dari yang sedang diproses sampai yang sudah selesai.
+          </p>
+        </section>
+
+        <!-- 3 Summary Statistics Cards -->
+        <section class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-label">Total pesanan</span>
+            <span class="stat-value text-blue" id="statTotal">5</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Sedang Diproses</span>
+            <span class="stat-value text-orange" id="statProcessing">2</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Selesai</span>
+            <span class="stat-value text-green" id="statCompleted">3</span>
+          </div>
+        </section>
+
+        <!-- Filter Tabs / Pills -->
+        <section class="filter-tabs-wrapper">
+          <div class="filter-tabs" role="tablist">
+            <button class="tab-pill active" data-filter="all" role="tab" id="tabAll">
+              Semua (5)
+            </button>
+            <button class="tab-pill" data-filter="diproses" role="tab" id="tabProcessing">
+              Diproses (2)
+            </button>
+            <button class="tab-pill" data-filter="selesai" role="tab" id="tabCompleted">
+              Selesai (3)
+            </button>
+          </div>
+        </section>
+
+        <!-- Orders List Container -->
+        <section class="orders-list" id="ordersListContainer">
+          <!-- Populated by JavaScript -->
+        </section>
+      </div>
+    </main>
+  </section>
+
+  <!-- ========================================================
+       VIEW 3: DETAIL PESANAN (Order Detail)
+       ======================================================== -->
+  <section class="app-view" id="viewDetail">
+    <main class="dashboard-main">
+      <div class="content-container">
+        <!-- Back Navigation Button -->
+        <div class="back-nav-wrapper">
+          <button type="button" class="btn-back-pill" id="backToOrdersBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Kembali ke Riwayat
+          </button>
+        </div>
+
+        <!-- Detail Page Header -->
+        <section class="detail-header">
+          <div class="detail-title-group">
+            <h1 class="detail-title">Detail Pesanan</h1>
+            <p class="detail-subtitle" id="detailOrderCode">Kode pesanan LDR - 1020</p>
+          </div>
+          <div class="detail-status-badge-container">
+            <span class="badge-status-lg badge-diproses" id="detailStatusBadge">Diproses</span>
+          </div>
+        </section>
+
+        <!-- 2-Column Grid Layout -->
+        <div class="detail-layout-grid">
+          <!-- Left Column -->
+          <div class="detail-left-col">
+            <!-- Card: Status Pesanan (Vertical Stepper) -->
+            <section class="detail-card">
+              <h2 class="card-section-title">Status Pesanan</h2>
+              <div class="stepper-timeline" id="detailStepper">
+                <!-- Dynamically populated or updated by script -->
+              </div>
+            </section>
+
+            <!-- Card: Rincian Layanan -->
+            <section class="detail-card">
+              <h2 class="card-section-title">Rincian Layanan</h2>
+              <div class="service-breakdown-list" id="detailBreakdownList">
+                <!-- Dynamically populated -->
+              </div>
+            </section>
+          </div>
+
+          <!-- Right Column -->
+          <div class="detail-right-col">
+            <!-- Card: Informasi Pesanan -->
+            <section class="detail-card info-card">
+              <h2 class="card-section-title">Informasi Pesanan</h2>
+              <div class="info-data-list">
+                <div class="info-data-row">
+                  <span class="info-data-label">Tanggal Pesanan</span>
+                  <span class="info-data-value" id="detailDate">7 Okt 2026</span>
+                </div>
+                <div class="info-data-row">
+                  <span class="info-data-label">Estimasi Selesai</span>
+                  <span class="info-data-value" id="detailEstDate">9 Okt 2026</span>
+                </div>
+                <div class="info-data-row">
+                  <span class="info-data-label">Pembayaran</span>
+                  <span class="info-data-value" id="detailPaymentStatus">--</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- Button Bayar Sekarang -->
+            <button type="button" class="btn-pay-now" id="payNowBtn">
+              Bayar Sekarang
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <!-- ========================================================
+       VIEW 4: DASHBOARD ADMIN HUB (matching Image 1)
+       ======================================================== -->
+  <section class="app-view" id="viewAdminHub">
+    <div class="admin-hub-wrapper">
+      <!-- Water wave decoration in corners -->
+      <div class="admin-wave-top-right" aria-hidden="true">
+        <img src="assets/ombak.png" alt="" class="wave-img-flip">
+      </div>
+      <div class="admin-wave-bottom-left" aria-hidden="true">
+        <img src="assets/ombak.png" alt="" class="wave-img">
+      </div>
+
+      <header class="admin-hub-header">
+        <h1 class="admin-hub-title">DASHBOARD ADMIN</h1>
+      </header>
+
+      <div class="admin-cards-container">
+        <!-- Card 1: Pesanan -->
+        <div class="admin-choice-card" id="cardGoAdminOrders">
+          <!-- Ambient circles & stars -->
+          <div class="choice-deco-bubble bubble-c1"></div>
+          <div class="choice-deco-bubble bubble-c2"></div>
+          <div class="choice-deco-bubble bubble-c3"></div>
+          <div class="choice-star star-1">&#10022;</div>
+          <div class="choice-star star-2">&#10022;</div>
+          <div class="choice-star star-3">&#10022;</div>
+          <div class="choice-star star-4">&#10022;</div>
+
+          <div class="choice-icon-badge">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="14" y="10" width="36" height="46" rx="8" fill="#E6EEF8" stroke="#1E293B" stroke-width="2.5" />
+              <rect x="24" y="6" width="16" height="8" rx="3" fill="#94A3B8" stroke="#1E293B" stroke-width="2" />
+              <line x1="22" y1="24" x2="36" y2="24" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" />
+              <line x1="22" y1="31" x2="34" y2="31" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" />
+              <rect x="34" y="38" width="14" height="14" rx="2" fill="#FFFFFF" stroke="#EF4444" stroke-width="2" />
+              <polyline points="37 45 40 48 45 42" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+
+          <button type="button" class="btn-choice-pill" id="btnAdminPesanan">
+            Pesanan
+          </button>
+        </div>
+
+        <!-- Card 2: Papan Status -->
+        <div class="admin-choice-card" id="cardGoAdminKanban">
+          <!-- Ambient circles & stars -->
+          <div class="choice-deco-bubble bubble-c4"></div>
+          <div class="choice-deco-bubble bubble-c5"></div>
+          <div class="choice-deco-bubble bubble-c6"></div>
+          <div class="choice-star star-5">&#10022;</div>
+          <div class="choice-star star-6">&#10022;</div>
+          <div class="choice-star star-7">&#10022;</div>
+
+          <div class="choice-icon-badge badge-blue">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="16" y="12" width="32" height="42" rx="7" fill="#E6EEF8" stroke="#0284C7" stroke-width="2.5" />
+              <line x1="23" y1="22" x2="35" y2="22" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round" />
+              <line x1="23" y1="28" x2="31" y2="28" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round" />
+              <circle cx="38" cy="40" r="9" fill="#FFFFFF" stroke="#0284C7" stroke-width="2" />
+              <polyline points="38 35 38 40 42 40" stroke="#0284C7" stroke-width="2" stroke-linecap="round" />
+              <path d="M48 18L50 14L52 18L56 20L52 22L50 26L48 22L44 20L48 18Z" fill="#38BDF8" />
+            </svg>
+          </div>
+
+          <button type="button" class="btn-choice-pill" id="btnAdminPapanStatus">
+            Papan Status
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       VIEW 5: ADMIN - KELOLA PESANAN (matching Image 2)
+       ======================================================== -->
+  <section class="app-view" id="viewAdminOrders">
+    <main class="dashboard-main admin-main-wrapper">
+      <div class="content-container">
+        <!-- Top Navigation Sub-bar -->
+        <div class="admin-subnav-bar">
+          <div class="admin-counters-group">
+            <div class="admin-counter-pill">
+              <span class="ac-label">Sedang Diproses:</span>
+              <span class="ac-value text-orange" id="adminCountProcessing">0</span>
+            </div>
+            <div class="admin-counter-pill">
+              <span class="ac-label">Siap Diambil:</span>
+              <span class="ac-value text-blue" id="adminCountReady">0</span>
+            </div>
+            <div class="admin-counter-pill">
+              <span class="ac-label">Belum Lunas:</span>
+              <span class="ac-value text-danger" id="adminCountUnpaid">0</span>
+            </div>
+          </div>
+          <div class="admin-view-toggle-btns">
+            <button type="button" class="admin-toggle-btn active" id="btnSubnavOrders">Pesanan</button>
+            <button type="button" class="admin-toggle-btn" id="btnSubnavKanban">Papan Status</button>
+          </div>
+        </div>
+
+        <!-- 2 Columns: Pesanan Baru (Left) & Semua Pesanan (Right) -->
+        <div class="admin-orders-grid">
+          <!-- Left: Form Pesanan Baru -->
+          <div class="admin-form-col">
+            <div class="admin-white-card">
+              <h2 class="admin-card-title">Pesanan Baru</h2>
+              <form id="adminNewOrderForm" class="admin-order-form">
+                <div class="form-group">
+                  <label for="adminCustomerName" class="admin-label">Nama Pemesan</label>
+                  <input type="text" id="adminCustomerName" class="form-input" placeholder="Masukkan nama pemesan"
+                    required>
+                </div>
+
+                <div class="form-group">
+                  <label for="adminCustomerPhone" class="admin-label">Nomor HP</label>
+                  <input type="tel" id="adminCustomerPhone" class="form-input" placeholder="0812xxxxxxxx" required>
+                  <span class="admin-helper-text">Contoh: 0812xxxx / 6281xxxx</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="adminServiceSelect" class="admin-label">Layanan</label>
+                  <select id="adminServiceSelect" class="form-input form-select" required>
+                    <option value="Cuci + Setrika" data-price="7000" data-days="2" selected>Cuci + Setrika (7.000/kg, 2
+                      hari)</option>
+                    <option value="Cuci Kering" data-price="6000" data-days="1">Cuci Kering (6.000/kg, 1 hari)</option>
+                    <option value="Cuci + Setrika Express" data-price="12000" data-days="1">Cuci + Setrika Express
+                      (12.000/kg, 1 hari)</option>
+                    <option value="Bedcover dan Selimut" data-price="11000" data-days="3">Bedcover dan Selimut
+                      (11.000/kg, 3 hari)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="adminWeightInput" class="admin-label">Berat (Kg)</label>
+                  <input type="number" id="adminWeightInput" class="form-input" value="3" min="0.5" step="0.5" required>
+                </div>
+
+                <!-- Total Biaya Summary Box -->
+                <div class="admin-total-calc-box">
+                  <span class="calc-label">Total Biaya</span>
+                  <span class="calc-amount" id="adminCalcTotal">Rp 21.000</span>
+                </div>
+
+                <button type="submit" class="btn-admin-submit" id="btnAdminSaveOrder">
+                  Simpan Pesanan
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Right: Tabel Semua Pesanan -->
+          <div class="admin-table-col">
+            <div class="admin-white-card">
+              <h2 class="admin-card-title">Semua Pesanan</h2>
+              <div class="admin-table-responsive">
+                <table class="admin-orders-table" id="adminOrdersTable">
+                  <thead>
+                    <tr>
+                      <th>Kode</th>
+                      <th>Pelanggan</th>
+                      <th>Layanan</th>
+                      <th>Total</th>
+                      <th>Status</th>
+                      <th>Bayar</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody id="adminOrdersTableBody">
+                    <!-- Dynamic Table Rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <!-- ========================================================
+       VIEW 6: ADMIN - PAPAN STATUS (matching Image 3)
+       ======================================================== -->
+  <section class="app-view" id="viewAdminKanban">
+    <main class="dashboard-main admin-main-wrapper">
+      <div class="content-container">
+        <!-- Header & Nav Buttons -->
+        <div class="admin-subnav-bar">
+          <h1 class="page-title">Papan Status</h1>
+          <div class="admin-view-toggle-btns">
+            <button type="button" class="admin-toggle-btn" id="btnKanbanToOrders">Pesanan</button>
+            <button type="button" class="admin-toggle-btn active" id="btnKanbanCurrent">Papan Status</button>
+          </div>
+        </div>
+
+        <!-- Kanban Board Columns (Menunggu, Dicuci, Disetrika, Siap Diambil) -->
+        <div class="kanban-board-grid">
+          <!-- Col 1: Menunggu -->
+          <div class="kanban-column" id="kanbanColWaiting">
+            <div class="kanban-col-header col-header-purple">
+              <span class="col-title">Menunggu</span>
+              <span class="col-badge" id="countWaiting">1</span>
+            </div>
+            <div class="kanban-cards-wrapper" id="kanbanCardsWaiting">
+              <!-- Cards -->
+            </div>
+          </div>
+
+          <!-- Col 2: Dicuci -->
+          <div class="kanban-column" id="kanbanColWashing">
+            <div class="kanban-col-header col-header-blue">
+              <span class="col-title">Dicuci</span>
+              <span class="col-badge" id="countWashing">2</span>
+            </div>
+            <div class="kanban-cards-wrapper" id="kanbanCardsWashing">
+              <!-- Cards -->
+            </div>
+          </div>
+
+          <!-- Col 3: Disetrika -->
+          <div class="kanban-column" id="kanbanColIroning">
+            <div class="kanban-col-header col-header-orange">
+              <span class="col-title">Disetrika</span>
+              <span class="col-badge" id="countIroning">1</span>
+            </div>
+            <div class="kanban-cards-wrapper" id="kanbanCardsIroning">
+              <!-- Cards -->
+            </div>
+          </div>
+
+          <!-- Col 4: Siap Diambil -->
+          <div class="kanban-column" id="kanbanColReady">
+            <div class="kanban-col-header col-header-green">
+              <span class="col-title">Siap Diambil</span>
+              <span class="col-badge" id="countReady">1</span>
+            </div>
+            <div class="kanban-cards-wrapper" id="kanbanCardsReady">
+              <!-- Cards -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <!-- ========================================================
+       MODAL: PEMBAYARAN BERHASIL (matching Image 3)
+       ======================================================== -->
+  <div class="modal-backdrop hidden" id="paymentModal">
+    <div class="payment-success-card" role="dialog" aria-modal="true" aria-labelledby="paySuccessTitle">
+      <!-- Brush Checkmark Icon -->
+      <div class="success-icon-badge">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="43" stroke="#22C55E" stroke-width="7" stroke-linecap="round" />
+          <path d="M30 50L43 63L72 34" stroke="#16A34A" stroke-width="8" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </div>
+
+      <h2 class="pay-success-title" id="paySuccessTitle">Pembayaran Berhasil</h2>
+      <p class="pay-success-desc">Terimakasih atas pembayaran laundry anda</p>
+
+      <div class="pay-modal-divider"></div>
+
+      <!-- Transaction Details -->
+      <div class="transaction-detail-table">
+        <div class="tr-row">
+          <span class="tr-label">Id Transaksi:</span>
+          <span class="tr-val bold" id="trxId">#TRX-09997</span>
+        </div>
+        <div class="tr-row">
+          <span class="tr-label">Waktu:</span>
+          <span class="tr-val" id="trxTime">9 Okt 2026, 10:12 WIB</span>
+        </div>
+        <div class="tr-row">
+          <span class="tr-label">Metode Pembayaran:</span>
+          <span class="tr-val">Bank Transfer (Mandiri)</span>
+        </div>
+        <div class="tr-row">
+          <span class="tr-label">Total Pembayaran:</span>
+          <span class="tr-val bold text-dark" id="trxAmount">Rp. 45.000</span>
+        </div>
+      </div>
+
+      <div class="pay-modal-divider"></div>
+
+      <!-- Return Button -->
+      <button type="button" class="btn-modal-return" id="returnDetailBtn">
+        Kembali Ke Detail
+      </button>
+    </div>
+  </div>
+
+  <!-- Dialog Popups for Lupa Kata Sandi & Register -->
+  <div class="modal-backdrop hidden" id="generalModal">
+    <div class="modal-box" role="dialog" aria-modal="true">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Tutup">&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-notification" id="toastNotification" role="alert" aria-live="assertive">
+    <div class="toast-icon" id="toastIcon"></div>
+    <div class="toast-message" id="toastMessage"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
