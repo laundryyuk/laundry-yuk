@@ -239,12 +239,16 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log('====================================================');
-  console.log(`🧺 Laundry Yuk Server Berjalan di: http://localhost:${PORT}`);
-  console.log('🔑 Aturan Login:');
-  console.log('   - Nomor WhatsApp / HP       -> Masuk sebagai PELANGGAN');
-  console.log('   - Akun Admin ("admin")      -> Masuk sebagai ADMIN');
-  console.log('====================================================');
-});
+// Start Server (Standalone / Local)
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log('====================================================');
+    console.log(`🧺 Laundry Yuk Server Berjalan di: http://localhost:${PORT}`);
+    console.log('🔑 Aturan Login:');
+    console.log('   - Nomor WhatsApp / HP       -> Masuk sebagai PELANGGAN');
+    console.log('   - Akun Admin ("admin")      -> Masuk sebagai ADMIN');
+    console.log('====================================================');
+  });
+}
+
+module.exports = app;
