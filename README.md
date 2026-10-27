@@ -56,13 +56,30 @@ Cukup klik ganda berkas **`index.html`** di browser.
 
 Berkas konfigurasi siap pakai telah disertakan di dalam proyek:
 
-### 1. Deploy ke Vercel (Rekomendasi - Full-Stack Express Serverless)
-- Konfigurasi [`vercel.json`](file:///c:/Users/Acer/.gemini/antigravity-ide/scratch/laundry-yuk/vercel.json) sudah disiapkan.
-- Hubungkan repositori GitHub ke [vercel.com](https://vercel.com) atau jalankan `npx vercel` di terminal.
+### 1. Deploy ke GitHub Pages (Gratis & Terintegrasi GitHub)
+1. Buat repositori baru di GitHub: [github.com/new](https://github.com/new) dengan nama repositori **`laundry-yuk`**.
+2. Di terminal, jalankan perintah push:
+   ```bash
+   git push -u origin main
+   ```
+3. Buka repositori Anda di GitHub $\rightarrow$ Masuk ke menu **Settings** $\rightarrow$ **Pages**.
+4. Pada bagian **Build and deployment**:
+   - Pilih **Source**: `GitHub Actions` (otomatis dideploy oleh workflow `.github/workflows/pages.yml`), atau
+   - Pilih `Deploy from a branch`, lalu pilih branch `main` dan folder `/ (root)` $\rightarrow$ Klik **Save**.
+5. Situs Anda akan aktif di: **`https://gopar086.github.io/laundry-yuk/`**
+
+---
+
+### 2. Deploy ke Vercel (Full-Stack Express Serverless)
+- Konfigurasi `vercel.json` sudah disiapkan.
+- Hubungkan repositori GitHub ke [vercel.com](https://vercel.com).
 - Vercel akan otomatis menjalankan backend Express dan menyajikan frontend static.
 
-### 2. Deploy ke Netlify (Instan Drag-and-Drop)
-- Konfigurasi [`netlify.toml`](file:///c:/Users/Acer/.gemini/antigravity-ide/scratch/laundry-yuk/netlify.toml) sudah disiapkan.
+---
+
+### 3. Deploy ke Netlify (Instan Drag-and-Drop)
+- Konfigurasi `netlify.toml` sudah disiapkan.
 - Kunjungi [app.netlify.com/drop](https://app.netlify.com/drop) dan seret folder proyek ini.
 - Website langsung aktif dengan URL HTTPS gratis.
+
 
